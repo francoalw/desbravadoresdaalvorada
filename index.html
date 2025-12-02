@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniversário do meu gatinha ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(120deg, #ffdde1, #ee9ca7);
+            font-family: "Quicksand", sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: "Great Vibes", cursive;
+            font-size: 4rem;
+            text-align: center;
+            margin-top: 40px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, .8);
+            animation: fadeIn 2s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+            animation: fadeInUp 2s ease;
+        }
+
+        .carta {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            margin-bottom: 50px;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, .2);
+        }
+
+        .slideshow::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: blur(25px);
+            transform: scale(1.2);
+            transition: opacity 1.3s ease;
+            z-index: 0;
+        }
+
+        .slide-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 100%;
+            width: auto;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1.3s ease;
+        }
+
+        .coracao {
+            position: fixed;
+            bottom: -10px;
+            color: pink;
+            font-size: 25px;
+            animation: subir 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes subir {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            100% { transform: translateY(-120vh) translateX(40px); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ÁUDIO COLOCADO NO LUGAR CERTO -->
+    <audio id="musica" autoplay loop>
+        <source src="voce.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1>Feliz Aniversário, meu dengola ❤️</h1>
+
+    <div class="container">
+
+        <div class="carta">
+            <p>Querida Saroca💗</p>
+            <p>Hoje a mulher mais incrível do mundo completa mais um ano de vida. Te desejo tudo de bom que existe neste mundo! Pois é isso que você me fornece lero lero</p>
+            <p>Obrigado por ser quem você é, obrigado por me escolher, obrigado por existir! Você me motiva, me inspira, me dá forças e me orgulha muito.</p>
+            <p>O que sinto por você não dá pra expressar dizendo então resolvi tentar programando rss</p>
+            <p>Estou com suadade. Feliz aniversário ❤️🎂  Hoje o mundo fica mais bonito porque é seu dia. Você é o meu amor!</p>
+        </div>
+
+        <div class="slideshow" id="slideshow">
+            <img src="1.jpg" class="slide-img">
+            <img src="2.jpg" class="slide-img">
+            <img src="3.jpg" class="slide-img">
+            <img src="4.jpg" class="slide-img">
+            <img src="5.jpg" class="slide-img">
+            <img src="6.jpg" class="slide-img">
+            <img src="7.jpg" class="slide-img">
+            <img src="8.jpg" class="slide-img">
+            <img src="9.jpg" class="slide-img">
+            <img src="10.jpg" class="slide-img">
+            <img src="11.jpg" class="slide-img">
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("musica");
+            audio.volume = 1.0;
+
+            document.body.addEventListener("click", () => {
+                audio.play();
+            }, { once: true });
+        });
+
+        let index = 0;
+        const slides = document.querySelectorAll(".slide-img");
+        const fundo = document.querySelector(".slideshow");
+
+        function trocarSlide() {
+            slides.forEach(s => s.style.opacity = 0);
+            let atual = slides[index];
+            atual.style.opacity = 1;
+            fundo.style.backgroundImage = `url(${atual.src})`;
+            index = (index + 1) % slides.length;
+        }
+
+        trocarSlide();
+        setInterval(trocarSlide, 3000);
+
+        function criarCoracao() {
+            const coracao = document.createElement("div");
+            coracao.classList.add("coracao");
+            coracao.innerHTML = "💖";
+            coracao.style.left = Math.random() * 100 + "vw";
+            coracao.style.fontSize = (20 + Math.random() * 30) + "px";
+            document.body.appendChild(coracao);
+            setTimeout(() => coracao.remove(), 6000);
+        }
+
+        setInterval(criarCoracao, 500);
+    </script>
+
+</body>
+</html>
